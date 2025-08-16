@@ -1,0 +1,20 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+
+# VS Code
+.vscode/
+
+# Node/React
+node_modules/
+build/
+npm-debug.log
+yarn-error.log
+
+# OS
+.DS_Store
+Thumbs.db
