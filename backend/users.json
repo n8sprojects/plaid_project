@@ -1,0 +1,13 @@
+{
+  "natetest": {
+    "password": "123",
+    "banks": [
+      {
+        "access_token": "access-sandbox-51181482-7158-46a9-bd26-d5d2cb3f5ea6"
+      }
+    ]
+  },
+  "sisi_lily": {
+    "password": "hit"
+  }
+}
