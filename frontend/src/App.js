@@ -1,27 +1,42 @@
-import { useEffect, useState } from 'react';
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import Login from "./Login";
+import Signup from "./Signup";
+import Dashboard from "./Dashboard";
 
 function App() {
-  const [linkToken, setLinkToken] = useState(null);
+  const [currentUsername, setCurrentUsername] = useState(null);
 
-  const getLinkToken = async () => {
-    const res = await fetch('http://localhost:5000/create_link_token'); // Flask endpoint
-    const data = await res.json();
-    setLinkToken(data.link_token);
+  const handleLoginSuccess = (username) => {
+    setCurrentUsername(username);
   };
 
-  useEffect(() => {
-    getLinkToken();
-  }, []);
-
   return (
-    <div>
-      <h1>Plaid Quickstart Test</h1>
-      {linkToken ? (
-        <p>Link Token: {linkToken}</p>
-      ) : (
-        <p>Loading Link Token...</p>
-      )}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            currentUsername ? (
+              <Navigate to="/dashboard" replace />
+            ) : (
+              <Login onLoginSuccess={handleLoginSuccess} />
+            )
+          }
+        />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/dashboard"
+          element={
+            currentUsername ? (
+              <Dashboard username={currentUsername} />
+            ) : (
+              <Navigate to="/" replace />
+            )
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
